@@ -43,3 +43,46 @@ export const registerUser = async (req, res) => {
             .json({ success: false, message: "Server error", error: e.message });
     }
 };
+
+export const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.json({ success: false, message: 'Please fill all the fields' });
+        };
+        const isUser = await userModel.find({ email });
+        if (!isUser) {
+            return res.send({ success: false, message: 'user does not exist' });
+        }
+        const isMatch = await bcrypt.compare(password, isUser.password);
+
+        if (isMatch) {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            res.json({ success: true, token });
+        }
+
+        else {
+            res.json({ success: false, message: 'Invalid credentials' })
+        }
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message });
+    }
+}
+
+export const getProfile = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        if (!userId) {
+            return res.json({ success: false, message: 'userId is missing' })
+        }
+        const user = await userModel.findById(userId).select('-password')
+        res.json({ success: true, user })
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
