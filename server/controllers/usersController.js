@@ -13,7 +13,6 @@ export const registerUser = async (req, res) => {
         }
 
         const isUserExist = await userModel.findOne({ email });
-        console.log(isUserExist);
         if (isUserExist) {
             return res
                 .status(400)
@@ -83,6 +82,29 @@ export const getProfile = async (req, res) => {
     }
     catch (err) {
         console.log(err);
+        res.send({ success: false, message: err.message });
     }
 }
 
+export const updateProfile = async (req, res) => {
+    try {
+        const { userId, name, phone, address, gender, dob } = req.body;
+        if (!name || !phone || !doc || !gender) {
+            return res.json({ success: false, message: 'Please fill the required details' })
+        }
+        const imageFile = req.file;
+        await findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), gender, dob });
+        if (imageFile) {
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: 'image' })
+            const imageUrl = imageUpload.secure_url;
+            await userModel.findByIdAndUpdate(userId, { image: imageUrl });
+        }
+        res.json({ success: true, message: "Profile Updated" });
+
+
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message });
+    }
+}
