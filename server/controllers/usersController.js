@@ -12,7 +12,7 @@ export const registerUser = async (req, res) => {
             return res
                 .status(400)
                 .json({ success: false, message: "Please fill all the required details" });
-        }
+        
 
         const isUserExist = await userModel.findOne({ email });
         if (isUserExist) {
@@ -143,7 +143,7 @@ export const bookAppointment = async (req, res) => {
             amound: docData.fee,
             slotTime,
             slotDate,
-            data: Date.now();
+            date: Date.now()
         };
         const newAppointment = new appointmentModel(appointmentData);
         await newAppointment.save();
