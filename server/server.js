@@ -33,8 +33,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use('/api/user', userRouter);
-app.use('/api/doctor', doctorRouter);
+app.use('api/user', userRouter);
+app.use('api/doctor', doctorRouter);
 
 app.get('/', (req, res) => {
     res.json({
