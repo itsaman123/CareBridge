@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import doctorModel from "../models/doctor.js";
 import appointmentModel from "../models/appointmentModel.js";
+import { v2 as cloudinary } from 'cloudinary';
 
 export const registerUser = async (req, res) => {
     try {
@@ -12,7 +13,7 @@ export const registerUser = async (req, res) => {
             return res
                 .status(400)
                 .json({ success: false, message: "Please fill all the required details" });
-        
+        }
 
         const isUserExist = await userModel.findOne({ email });
         if (isUserExist) {
@@ -51,14 +52,14 @@ export const loginUser = async (req, res) => {
         if (!email || !password) {
             return res.json({ success: false, message: 'Please fill all the fields' });
         };
-        const isUser = await userModel.find({ email });
+        const isUser = await userModel.findOne({ email });
         if (!isUser) {
             return res.send({ success: false, message: 'user does not exist' });
         }
         const isMatch = await bcrypt.compare(password, isUser.password);
 
         if (isMatch) {
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const token = jwt.sign({ id: isUser._id }, process.env.JWT_SECRET);
             res.json({ success: true, token });
         }
 
@@ -91,11 +92,11 @@ export const getProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { userId, name, phone, address, gender, dob } = req.body;
-        if (!name || !phone || !doc || !gender) {
+        if (!name || !phone || !gender) {
             return res.json({ success: false, message: 'Please fill the required details' })
         }
         const imageFile = req.file;
-        await findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), gender, dob });
+        await userModel.findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), gender, dob });
         if (imageFile) {
             const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: 'image' })
             const imageUrl = imageUpload.secure_url;
@@ -119,9 +120,9 @@ export const bookAppointment = async (req, res) => {
         if (!docData.available) {
             return res.json({ success: false, message: 'Doctor Not Available' });
         }
-        let slots_booked = docData.slot_booked;
+        let slots_booked = docData.slots_booked;
 
-        if (slot_booked[slotDate]) {
+        if (slots_booked[slotDate]) {
             if (slots_booked[slotDate].includes(slotTime)) {
                 return res.send({ success: false, message: 'Slot not available' })
             }
@@ -140,7 +141,7 @@ export const bookAppointment = async (req, res) => {
             docId,
             userData,
             docData,
-            amound: docData.fee,
+            amount: docData.fees,
             slotTime,
             slotDate,
             date: Date.now()
@@ -149,6 +150,8 @@ export const bookAppointment = async (req, res) => {
         await newAppointment.save();
 
         await doctorModel.findByIdAndUpdate(docId, { slots_booked })
+
+        res.json({ success: true, message: 'Appointment booked successfully' });
 
     }
     catch (err) {
