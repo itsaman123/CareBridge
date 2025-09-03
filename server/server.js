@@ -1,5 +1,6 @@
 import express from 'express';
 import userRouter from './routes/userRoute.js'
+import doctorRouter from './routes/doctorRoute.js'
 import morgan from 'morgan';
 import dotenv from 'dotenv'
 import cors from 'cors'
@@ -13,7 +14,7 @@ dotenv.config();
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors)
+app.use(cors())
 
 const allowedOrigins = [
     "http://localhost:5173",
@@ -33,7 +34,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);
+app.use('/api/doctor', doctorRouter);
 
 app.get('/', (req, res) => {
     res.json({

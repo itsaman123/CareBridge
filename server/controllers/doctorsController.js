@@ -1,8 +1,8 @@
-import userModel from "../models/user.js";
+import doctorModel from "../models/doctor.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
-const loginDoctor = async (req, res) => {
+export const loginDoctor = async (req, res) => {
 
     try {
         const { email, password } = req.body
@@ -27,7 +27,7 @@ const loginDoctor = async (req, res) => {
     }
 }
 
-const doctorProfile = async (req, res) => {
+export const doctorProfile = async (req, res) => {
     try {
 
         const { docId } = req.body
@@ -41,7 +41,7 @@ const doctorProfile = async (req, res) => {
     }
 }
 
-const updateDoctorProfile = async (req, res) => {
+export const updateDoctorProfile = async (req, res) => {
     try {
 
         const { docId, fees, address, available } = req.body
