@@ -14,7 +14,6 @@ dotenv.config();
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors())
 
 const allowedOrigins = [
     "http://localhost:5173",
