@@ -1,7 +1,9 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import { useNavigate } from 'react-router-dom'
 
 const Footer = () => {
+  const navigate = useNavigate()
   return (
     <div className='md:mx-10'>
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10  mt-40 text-sm'>
@@ -9,11 +11,11 @@ const Footer = () => {
         <div>
 
           <div className='flex items-center gap-2 cursor-pointer group' onClick={() => navigate('/')}>
-          <div className='w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center shadow-glow'>
-            <span className='text-white font-bold text-lg'>D</span>
+            <div className='w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center shadow-glow'>
+              <span className='text-white font-bold text-lg'>D</span>
+            </div>
+            <h1 className='text-xl font-bold text-gradient'>DoctorHub</h1>
           </div>
-          <h1 className='text-xl font-bold text-gradient'>DoctorHub</h1>
-        </div>
           <p className='w-full md:w-2/3 text-gray-600 leading-6'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         </div>
 

@@ -159,3 +159,15 @@ export const bookAppointment = async (req, res) => {
         res.send({ success: false, message: err.message });
     }
 }
+
+export const listAppointment = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const appointments = await appointmentModel.find({ user_id: userId });
+        res.json({ success: true, appointments })
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message });
+    }
+}
