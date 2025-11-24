@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import 'dotenv/config';
-import './config/db.js';
+import { connectDB } from './config/db.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -45,6 +45,15 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Listening at PORT ${PORT}`);
-});
+// connect to MongoDB first, then start server
+(async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Listening at PORT ${PORT}`);
+        });
+    } catch (err) {
+        console.error('Failed to start server:', err);
+        process.exit(1);
+    }
+})();
