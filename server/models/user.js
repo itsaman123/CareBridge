@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     address: { type: Object, default: { line1: '', line2: '' } },
     dob: { type: String, default: 'Not selected' },
     gender: { type: String },
+    token: { type: String }
 })
 
 const userModel = mongoose.model('user', userSchema);

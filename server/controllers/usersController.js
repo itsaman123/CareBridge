@@ -33,9 +33,8 @@ export const registerUser = async (req, res) => {
 
         const user = await newUser.save();
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: "7d", // optional
-        });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        await userModel.findByIdAndUpdate(user._id, { token });
 
         res.status(201).json({ success: true, token });
     } catch (e) {
@@ -49,29 +48,42 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
+
         if (!email || !password) {
             return res.json({ success: false, message: 'Please fill all the fields' });
-        };
-        const isUser = await userModel.findOne({ email });
-        if (!isUser) {
-            return res.send({ success: false, message: 'user does not exist' });
-        }
-        const isMatch = await bcrypt.compare(password, isUser.password);
-
-        if (isMatch) {
-            const token = jwt.sign({ id: isUser._id }, process.env.JWT_SECRET);
-            res.json({ success: true, token });
         }
 
-        else {
-            res.json({ success: false, message: 'Invalid credentials' })
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.json({ success: false, message: 'User does not exist' });
         }
-    }
-    catch (err) {
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.json({ success: false, message: 'Invalid credentials' });
+        }
+
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
+
+        const userObj = user.toObject();
+        delete userObj.password;
+
+        res.json({
+            success: true,
+            user: userObj,
+            token
+        });
+
+    } catch (err) {
         console.log(err);
-        res.send({ success: false, message: err.message });
+        res.json({ success: false, message: err.message });
     }
-}
+};
+
 
 export const getProfile = async (req, res) => {
     try {
@@ -80,6 +92,18 @@ export const getProfile = async (req, res) => {
             return res.json({ success: false, message: 'userId is missing' })
         }
         const user = await userModel.findById(userId).select('-password')
+        res.json({ success: true, user })
+
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message });
+    }
+}
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const user = await userModel.find().select('-password')
         res.json({ success: true, user })
 
     }
