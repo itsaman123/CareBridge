@@ -51,32 +51,100 @@ const Login = () => {
   }, [token])
 
   return (
-    <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>
-      <div className='flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg'>
-        <p className='text-2xl font-semibold'>{state === 'Sign Up' ? 'Create Account' : 'Login'}</p>
-        <p>Please {state === 'Sign Up' ? 'sign up' : 'log in'} to book appointment</p>
-        {state === 'Sign Up'
-          ? <div className='w-full '>
-            <p>Full Name</p>
-            <input onChange={(e) => setName(e.target.value)} value={name} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="text" required />
+    <div className='min-h-[80vh] flex items-center justify-center py-12'>
+      <div className='w-full max-w-md'>
+        <form onSubmit={onSubmitHandler} className='card p-8 md:p-10 space-y-6'>
+          {/* Header */}
+          <div className='text-center mb-8'>
+            <div className='inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-4 shadow-glow'>
+              <span className='text-black text-2xl font-bold'>D</span>
+            </div>
+            <h2 className='text-3xl font-bold text-cyan-300 mb-2'>
+              {state === 'Sign Up' ? 'Create Account' : 'Welcome Back'}
+            </h2>
+            <p className='text-cyan-400/80'>
+              {state === 'Sign Up' 
+                ? 'Join us to book your appointments easily' 
+                : 'Sign in to continue to your account'}
+            </p>
           </div>
-          : null
-        }
-        <div className='w-full '>
-          <p>Email</p>
-          <input onChange={(e) => setEmail(e.target.value)} value={email} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
-        </div>
-        <div className='w-full '>
-          <p>Password</p>
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
-        </div>
-        <button className='bg-primary text-white w-full py-2 my-2 rounded-md text-base'>{state === 'Sign Up' ? 'Create account' : 'Login'}</button>
-        {state === 'Sign Up'
-          ? <p>Already have an account? <span onClick={() => setState('Login')} className='text-primary underline cursor-pointer'>Login here</span></p>
-          : <p>Create an new account? <span onClick={() => setState('Sign Up')} className='text-primary underline cursor-pointer'>Click here</span></p>
-        }
+
+          {/* Form Fields */}
+          <div className='space-y-5'>
+            {state === 'Sign Up' && (
+              <div className='space-y-2'>
+                <label className='text-sm font-medium text-cyan-300'>Full Name</label>
+                <input 
+                  onChange={(e) => setName(e.target.value)} 
+                  value={name} 
+                  className='form-input focus:border-cyan-400' 
+                  type="text" 
+                  placeholder="Enter your full name"
+                  required 
+                />
+              </div>
+            )}
+            
+            <div className='space-y-2'>
+              <label className='text-sm font-medium text-cyan-300'>Email Address</label>
+              <input 
+                onChange={(e) => setEmail(e.target.value)} 
+                value={email} 
+                className='form-input focus:border-cyan-400' 
+                type="email" 
+                placeholder="Enter your email"
+                required 
+              />
+            </div>
+            
+            <div className='space-y-2'>
+              <label className='text-sm font-medium text-cyan-300'>Password</label>
+              <input 
+                onChange={(e) => setPassword(e.target.value)} 
+                value={password} 
+                className='form-input focus:border-cyan-400' 
+                type="password" 
+                placeholder="Enter your password"
+                required 
+              />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button 
+            type="submit"
+            className='btn-primary w-full text-base font-semibold py-3.5'
+          >
+            {state === 'Sign Up' ? 'Create Account' : 'Sign In'}
+          </button>
+
+          {/* Toggle State */}
+          <div className='text-center pt-4 border-t border-cyan-500/20'>
+            <p className='text-sm text-cyan-400/80'>
+              {state === 'Sign Up' ? (
+                <>Already have an account?{' '}
+                  <span 
+                    onClick={() => setState('Login')} 
+                    className='text-cyan-300 font-semibold cursor-pointer hover:text-cyan-200 transition-colors'
+                  >
+                    Sign In
+                  </span>
+                </>
+              ) : (
+                <>Don't have an account?{' '}
+                  <span 
+                    onClick={() => setState('Sign Up')} 
+                    className='text-cyan-300 font-semibold cursor-pointer hover:text-cyan-200 transition-colors'
+                  >
+                    Create Account
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   )
 }
 

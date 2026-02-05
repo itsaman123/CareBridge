@@ -16,22 +16,37 @@ import Verify from './pages/Verify'
 
 const App = () => {
   return (
-    <div className='mx-4 sm:mx-[10%]'>
-      <ToastContainer />
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/doctors' element={<Doctors />} />
-        <Route path='/doctors/:speciality' element={<Doctors />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/appointment/:docId' element={<Appointment />} />
-        <Route path='/my-appointments' element={<MyAppointments />} />
-        <Route path='/my-profile' element={<MyProfile />} />
-        <Route path='/verify' element={<Verify />} />
-      </Routes>
-      <Footer />
+    <div className='relative min-h-screen'>
+      <div className='mx-4 sm:mx-6 lg:mx-[8%] xl:mx-[10%] relative z-10'>
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <Navbar />
+        <main className='min-h-[calc(100vh-200px)]'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/doctors' element={<Doctors />} />
+            <Route path='/doctors/:speciality' element={<Doctors />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/appointment/:docId' element={<Appointment />} />
+            <Route path='/my-appointments' element={<MyAppointments />} />
+            <Route path='/my-profile' element={<MyProfile />} />
+            <Route path='/verify' element={<Verify />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -38,10 +38,10 @@ const Doctors = () => {
       <div className='container-padding'>
         {/* Header */}
         <div className='text-center mb-12'>
-          <h1 className='text-4xl md:text-5xl font-bold text-neutral-800 mb-4'>
+          <h1 className='text-4xl md:text-5xl font-bold text-cyan-300 mb-4'>
             Browse <span className='text-gradient'>Doctors</span>
           </h1>
-          <p className='text-lg text-neutral-600 max-w-2xl mx-auto'>
+          <p className='text-lg text-cyan-400/80 max-w-2xl mx-auto'>
             Find and book appointments with our trusted healthcare professionals.
           </p>
         </div>
@@ -51,13 +51,13 @@ const Doctors = () => {
           <div className='lg:w-80 flex-shrink-0'>
             <div className='sticky top-24'>
               <div className='card p-6'>
-                <h3 className='text-xl font-semibold text-neutral-800 mb-4'>Specialities</h3>
+                <h3 className='text-xl font-semibold text-cyan-300 mb-4'>Specialities</h3>
                 <div className='space-y-2'>
                   <button
                     onClick={() => navigate('/doctors')}
                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 ${!speciality
-                        ? 'bg-primary-50 text-primary-700 border border-primary-200'
-                        : 'hover:bg-neutral-50 text-neutral-700'
+                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/50'
+                        : 'hover:bg-cyan-500/10 text-cyan-400'
                       }`}
                   >
                     All Specialities
@@ -67,8 +67,8 @@ const Doctors = () => {
                       key={spec}
                       onClick={() => navigate(`/doctors/${spec}`)}
                       className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 ${speciality === spec
-                          ? 'bg-primary-50 text-primary-700 border border-primary-200'
-                          : 'hover:bg-neutral-50 text-neutral-700'
+                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/50'
+                          : 'hover:bg-cyan-500/10 text-cyan-400'
                         }`}
                     >
                       {spec}
@@ -83,10 +83,10 @@ const Doctors = () => {
           <div className='flex-1'>
             {speciality && (
               <div className='mb-6'>
-                <h2 className='text-2xl font-semibold text-neutral-800 mb-2'>
+                <h2 className='text-2xl font-semibold text-cyan-300 mb-2'>
                   {speciality} Specialists
                 </h2>
-                <p className='text-neutral-600'>
+                <p className='text-cyan-400/80'>
                   {filterDoc.length} doctor{filterDoc.length !== 1 ? 's' : ''} found
                 </p>
               </div>
@@ -132,23 +132,23 @@ const Doctors = () => {
 
                     {/* Doctor Info */}
                     <div className='p-6'>
-                      <h3 className='text-xl font-bold text-neutral-800 mb-2 group-hover:text-primary-600 transition-colors duration-300'>
+                      <h3 className='text-xl font-bold text-cyan-300 mb-2 group-hover:text-cyan-200 transition-colors duration-300'>
                         Dr. {item.name}
                       </h3>
-                      <p className='text-neutral-600 mb-3'>{item.speciality}</p>
+                      <p className='text-cyan-400/80 mb-3'>{item.speciality}</p>
 
                       <div className='flex items-center justify-between mb-4'>
-                        <div className='flex items-center gap-2 text-sm text-neutral-500'>
+                        <div className='flex items-center gap-2 text-sm text-cyan-500/70'>
                           <span>📍</span>
                           <span>Online Consultation</span>
                         </div>
-                        <div className='text-primary-600 font-semibold'>
+                        <div className='text-cyan-300 font-semibold'>
                           ₹{Math.floor(Math.random() * 500) + 500}
                         </div>
                       </div>
 
                       {/* Book Button */}
-                      <button className='w-full btn-primary bg-gradient-primary text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0'>
+                      <button className='w-full btn-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0'>
                         Book Appointment
                       </button>
                     </div>
@@ -162,8 +162,8 @@ const Doctors = () => {
                 <div className='w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4'>
                   <span className='text-4xl'>👨‍⚕️</span>
                 </div>
-                <h3 className='text-xl font-semibold text-neutral-800 mb-2'>No doctors found</h3>
-                <p className='text-neutral-600 mb-6'>
+                <h3 className='text-xl font-semibold text-cyan-300 mb-2'>No doctors found</h3>
+                <p className='text-cyan-400/80 mb-6'>
                   {speciality ? `No ${speciality.toLowerCase()} specialists available at the moment.` : 'No doctors available at the moment.'}
                 </p>
                 <button
