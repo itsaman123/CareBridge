@@ -6,10 +6,10 @@ const SpecialityMenu = () => {
     return (
         <section id='speciality' className='py-20'>
             <div className='text-center mb-16'>
-                <h2 className='text-4xl md:text-5xl font-bold text-neutral-800 mb-4'>
+                <h2 className='text-4xl md:text-5xl font-bold text-cyan-300 mb-4'>
                     Find by <span className='text-gradient'>Speciality</span>
                 </h2>
-                <p className='text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed'>
+                <p className='text-lg text-cyan-400/80 max-w-2xl mx-auto leading-relaxed'>
                     Choose from our comprehensive range of medical specialties and connect with expert healthcare professionals.
                 </p>
             </div>
@@ -24,14 +24,22 @@ const SpecialityMenu = () => {
                     >
                         <div className='card card-hover p-6 text-center transition-all duration-500 group-hover:shadow-glow'>
                             <div className='relative mb-4'>
-                                <div className='w-20 h-20 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-soft'>
-                                    <img className='w-12 h-12 object-contain' src={item.image} alt={item.speciality} />
+                                <div className='w-20 h-20 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-soft p-3'>
+                                    <img 
+                                        className='w-full h-full object-contain' 
+                                        style={{ 
+                                            filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(160deg) brightness(1.2)',
+                                            mixBlendMode: 'normal'
+                                        }}
+                                        src={item.image} 
+                                        alt={item.speciality} 
+                                    />
                                 </div>
                                 <div className='absolute -top-2 -right-2 w-6 h-6 bg-gradient-secondary rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-glow-secondary'>
-                                    <span className='text-white text-xs'>→</span>
+                                    <span className='text-black text-xs font-bold'>→</span>
                                 </div>
                             </div>
-                            <h3 className='font-semibold text-neutral-800 group-hover:text-primary-600 transition-colors duration-300'>
+                            <h3 className='font-semibold text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300'>
                                 {item.speciality}
                             </h3>
                         </div>
@@ -41,8 +49,8 @@ const SpecialityMenu = () => {
 
             {/* Decorative Elements */}
             <div className='relative mt-20'>
-                <div className='absolute top-1/2 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl'></div>
-                <div className='absolute top-1/2 right-1/4 w-40 h-40 bg-secondary/10 rounded-full blur-3xl'></div>
+                <div className='absolute top-1/2 left-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl'></div>
+                <div className='absolute top-1/2 right-1/4 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl'></div>
             </div>
         </section>
     )

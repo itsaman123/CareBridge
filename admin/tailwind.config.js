@@ -1,0 +1,208 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      gridTemplateColumns: {
+        auto: "repeat(auto-fill, minmax(200px, 1fr))",
+      },
+      colors: {
+        primary: {
+          50: "#E0FFFF",
+          100: "#B0FFFF",
+          200: "#80FFFF",
+          300: "#00FFFF",
+          400: "#00CED1",
+          500: "#00CED1",
+          600: "#00BFFF",
+          700: "#008B8B",
+          800: "#006666",
+          900: "#004040",
+          DEFAULT: "#00FFFF",
+          dark: "#00CED1",
+          light: "#40E0D0",
+        },
+        aqua: {
+          50: "#E0FFFF",
+          100: "#B0FFFF",
+          200: "#80FFFF",
+          300: "#00FFFF",
+          400: "#00CED1",
+          500: "#00CED1",
+          600: "#00BFFF",
+          700: "#008B8B",
+          800: "#006666",
+          900: "#004040",
+          DEFAULT: "#00CED1",
+        },
+        cyan: {
+          50: "#E0FFFF",
+          100: "#B0FFFF",
+          200: "#80FFFF",
+          300: "#00FFFF",
+          400: "#00CED1",
+          500: "#00CED1",
+          600: "#00BFFF",
+          700: "#008B8B",
+          800: "#006666",
+          900: "#004040",
+          DEFAULT: "#00FFFF",
+        },
+        secondary: {
+          50: "#ECFDF5",
+          100: "#D1FAE5",
+          200: "#A7F3D0",
+          300: "#6EE7B7",
+          400: "#34D399",
+          500: "#10B981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065F46",
+          900: "#064E3B",
+          DEFAULT: "#10B981",
+          dark: "#059669",
+          light: "#34D399",
+        },
+        teal: {
+          50: "#F0FDFA",
+          100: "#CCFBF1",
+          200: "#99F6E4",
+          300: "#5EEAD4",
+          400: "#2DD4BF",
+          500: "#14B8A6",
+          600: "#0D9488",
+          700: "#0F766E",
+          800: "#115E59",
+          900: "#134E4A",
+          DEFAULT: "#14B8A6",
+        },
+        accent: {
+          50: "#FFFBEB",
+          100: "#FEF3C7",
+          200: "#FDE68A",
+          300: "#FCD34D",
+          400: "#FBBF24",
+          500: "#F59E0B",
+          600: "#D97706",
+          700: "#B45309",
+          800: "#92400E",
+          900: "#78350F",
+          DEFAULT: "#F59E0B",
+          dark: "#D97706",
+          light: "#FBBF24",
+        },
+        neutral: {
+          50: "#F8FAFC",
+          100: "#F1F5F9",
+          200: "#E2E8F0",
+          300: "#CBD5E1",
+          400: "#94A3B8",
+          500: "#64748B",
+          600: "#475569",
+          700: "#334155",
+          800: "#1E293B",
+          900: "#0F172A",
+        },
+        success: "#10B981",
+        warning: "#F59E0B",
+        error: "#EF4444",
+        info: "#3B82F6",
+      },
+      backgroundImage: {
+        "gradient-primary":
+          "linear-gradient(135deg, #00FFFF 0%, #00CED1 50%, #40E0D0 100%)",
+        "gradient-secondary":
+          "linear-gradient(135deg, #00CED1 0%, #00FFFF 100%)",
+        "gradient-accent":
+          "linear-gradient(135deg, #40E0D0 0%, #00FFFF 100%)",
+        "gradient-card":
+          "linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%)",
+        "gradient-hero":
+          "linear-gradient(135deg, #000000 0%, #001a1a 30%, #003333 60%, #000000 100%)",
+        "gradient-medical":
+          "linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 206, 209, 0.1) 50%, rgba(64, 224, 208, 0.1) 100%)",
+        "gradient-dark":
+          "linear-gradient(135deg, #1E293B 0%, #334155 100%)",
+        "gradient-glass":
+          "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+        "gradient-sunset":
+          "linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #8B5CF6 100%)",
+        "gradient-ocean":
+          "linear-gradient(135deg, #0EA5E9 0%, #6366F1 50%, #8B5CF6 100%)",
+      },
+      boxShadow: {
+        soft:
+          "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)",
+        medium:
+          "0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        large:
+          "0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+        glow: "0 0 20px rgba(0, 255, 255, 0.4)",
+        "glow-lg": "0 0 40px rgba(0, 255, 255, 0.5)",
+        "glow-secondary": "0 0 20px rgba(0, 206, 209, 0.4)",
+        "glow-accent": "0 0 20px rgba(64, 224, 208, 0.4)",
+        inner: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-in-out",
+        "slide-up": "slideUp 0.5s ease-out",
+        "bounce-gentle": "bounceGentle 2s infinite",
+        "pulse-gentle": "pulseGentle 2s infinite",
+        float: "float 3s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite alternate",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        bounceGentle: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        pulseGentle: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.8" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        glow: {
+          "0%": { boxShadow: "0 0 20px rgba(0, 255, 255, 0.4)" },
+          "100%": { boxShadow: "0 0 30px rgba(0, 255, 255, 0.7)" },
+        },
+      },
+      backdropBlur: {
+        xs: "2px",
+      },
+    },
+  },
+  plugins: [],
+  safelist: [
+    "border-primary-200",
+    "border-secondary-200",
+    "border-primary-400",
+    "border-primary-100",
+    "border-neutral-200",
+    "bg-primary-100",
+    "bg-secondary-100",
+    "bg-accent-100",
+    "text-primary-700",
+    "text-secondary-700",
+    "text-accent-700",
+    "ring-primary-100",
+    "ring-primary-500",
+    "ring-offset-2",
+    "border-t-primary-200",
+    "focus:border-primary-400",
+    "focus:ring-primary-100",
+  ],
+};
